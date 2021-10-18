@@ -3,42 +3,25 @@ import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 
-const arr = [
-  {
-    id: 1,
-    name: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    imageUrl: '/img/sneakers/1.jpg',
-    price: 12999,
-    licked: false,
-  },
-  {
-    id: 2,
-    name: 'Мужские Кроссовки Nike Air Max 270',
-    price: 12999,
-    imageUrl: '/img/sneakers/2.jpg',
-    licked: false,
-  },
-  {
-    id: 3,
-    name: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    price: 8499,
-    imageUrl: '/img/sneakers/3.jpg',
-    licked: true,
-  },
-  {
-    id: 4,
-    name: 'Кроссовки Puma X Aka Boku Future Rider',
-    price: 8499,
-    imageUrl: '/img/sneakers/4.jpg',
-    licked: true,
-  },
-];
-
 function App() {
+  const [items, setItems] = React.useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
+  const [cartOpened, setCartOpened] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch('https://616d6f856dacbb001794ca43.mockapi.io/items')
+      .then((res) => res.json())
+      .then((data) => setItems(data));
+  }, []);
+
+  const onAddToCart = (obj) => {
+    setCartItems((prev) => [...prev, obj]);
+  };
+
   return (
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
+      {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)} />}
+      <Header onClickCart={() => setCartOpened(true)} />
 
       <div className="content p-40">
         <div className="d-flex align-center mb-40 justify-between">
@@ -50,15 +33,14 @@ function App() {
         </div>
 
         <div className="d-flex flex-wrap">
-          {arr.map((card) => (
+          {items.map((item, index) => (
             <Card
-              key={card.id}
-              id={card.id}
-              imageUrl={card.imageUrl}
-              name={card.name}
-              price={card.price}
-              licked={card.licked}
-              onClick={() => console.log(card)}
+              key={`${item.name}_${index}`}
+              imageUrl={item.imageUrl}
+              name={item.name}
+              price={item.price}
+              onPlus={onAddToCart}
+              onFavorite={() => console.log('Добавили в закладки')}
             />
           ))}
         </div>

@@ -1,14 +1,26 @@
 import React from 'react';
 import styles from './Card.module.scss';
 
-function Card({ id, name, price, licked, imageUrl, onClick }) {
+function Card({ name, price, imageUrl, onPlus, onFavorite }) {
+  const [isAdded, setIsAdded] = React.useState(false);
+
+  const onClickPlus = () => {
+    onPlus({ name, price, imageUrl });
+    setIsAdded(!isAdded);
+  };
+
+  React.useEffect(() => {
+    // console.log('Переменна изменилась');
+  }, [isAdded]);
+
   return (
     <div className={styles.card}>
       <div className={styles.favorite}>
         <img
+          onClick={onFavorite}
           width={32}
           height={32}
-          src={`/img/heart-${licked ? 'licked' : 'unlicked'}.svg`}
+          src="/img/heart-unlicked.svg"
           alt="Unlicked"
         />
       </div>
@@ -19,9 +31,14 @@ function Card({ id, name, price, licked, imageUrl, onClick }) {
           <span>Цена:</span>
           <b>{price} руб.</b>
         </div>
-        <button className="button" onClick={onClick}>
-          <img width={11} height={11} src="/img/plus.svg" alt="plus" />
-        </button>
+        <img
+          className={styles.plus}
+          onClick={onClickPlus}
+          width={32}
+          height={32}
+          src={`/img/${isAdded ? 'btn-checked.png' : 'btn-plus.svg'}`}
+          alt="plus"
+        />
       </div>
     </div>
   );
