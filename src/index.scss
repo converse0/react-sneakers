@@ -46,6 +46,15 @@ header {
   border-radius: 10px;
   padding: 0 15px;
 
+  .clear {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
   input {
     border: none;
     padding: 15px;
@@ -174,6 +183,37 @@ header {
 
     &:hover {
       opacity: 1;
+    }
+  }
+}
+
+.cartEmpty {
+  text-align: center;
+  margin-bottom: auto;
+  margin-top: auto;
+
+  p {
+    width: 285px;
+    line-height: 24px;
+    margin-bottom: 40px;
+    opacity: 0.4;
+  }
+
+  .greenButton {
+    width: 245px;
+
+    &:hover {
+      img {
+        transform: translateX(-5px) rotate(180deg);
+      }
+    }
+
+    img {
+      position: relative;
+      top: 1px;
+      transform: rotate(180deg);
+      margin-right: 15px;
+      transition: all 0.2s ease-in-out;
     }
   }
 }
