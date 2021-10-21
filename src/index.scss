@@ -213,3 +213,26 @@ header {
     }
   }
 }
+
+.favorites {
+  margin: 150px auto;
+  text-align: center;
+
+  .greenButton {
+    width: 245px;
+
+    &:hover {
+      img {
+        transform: translateX(-5px) rotate(180deg);
+      }
+    }
+
+    img {
+      position: relative;
+      top: 1px;
+      transform: rotate(180deg);
+      margin-right: 15px;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}

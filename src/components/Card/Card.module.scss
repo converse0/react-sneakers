@@ -1,6 +1,7 @@
 .card {
+  text-align: center;
   border: 1px solid #f3f3f3;
-  padding: 20px;
+  padding: 29px;
   width: 210px;
   border-radius: 40px;
   margin: 0 20px;
@@ -23,6 +24,7 @@
 
   span {
     text-transform: uppercase;
+    margin-right: auto;
     font-size: 11px;
     color: #bdbdbd;
   }
@@ -34,5 +36,6 @@
   h5 {
     font-weight: 400;
     font-size: 14px;
+    text-align: left;
   }
 }
