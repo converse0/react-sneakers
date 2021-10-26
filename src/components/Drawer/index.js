@@ -1,16 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 
-import AppContext from '../context';
-import Info from './Info';
+import AppContext from '../../context';
+import Info from '../Info';
+
+import styles from './Drawer.module.scss';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function Drawer({ items = [], onClose, onDelete, cartSum }) {
+function Drawer({ items = [], onClose, onDelete, cartSum, opened }) {
   const { cartItems, setCartItems } = React.useContext(AppContext);
   const [orderId, setOrderId] = React.useState(null);
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const onClickOrder = async () => {
     try {
@@ -34,8 +36,8 @@ function Drawer({ items = [], onClose, onDelete, cartSum }) {
   };
 
   return (
-    <div className="overlay">
-      <div className="drawer d-flex flex-column">
+    <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
+      <div className={`${styles.drawer} d-flex flex-column`}>
         <h2 className="mb-30 d-flex justify-between align-center">
           Корзина
           <img className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close" onClick={onClose} />

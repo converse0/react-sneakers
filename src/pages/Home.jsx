@@ -4,7 +4,6 @@ import Card from '../components/Card';
 
 function Home({
   items,
-  cartItems,
   searchValue,
   setSearchValue,
   onChangeSearchInput,

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Card from '../components/Card';
-import Info from '../components/Info';
+// import Info from '../components/Info';
 import AppContext from '../context';
 
 function Favorites() {
@@ -31,21 +31,15 @@ function Favorites() {
           ))}
         </div>
       ) : (
-        <Info
-          image="arrow.svg"
-          title="Закладок нет :("
-          description="Вы ничего не добавляли в закладки"
-        />
-
-        // <div className="favorites">
-        //   <h2>Закладок нет :(</h2>
-        //   <p className="opacity-4 mb-50">Вы ничего не добавляли в закладки</p>
-        //   <Link to="/">
-        //     <button to="/" className="greenButton mt-20">
-        //       <img src="/img/arrow.svg" alt="Arrow" /> Вернуться назад
-        //     </button>
-        //   </Link>
-        // </div>
+        <div className="favorites">
+          <h2>Закладок нет :(</h2>
+          <p className="opacity-4 mb-50">Вы ничего не добавляли в закладки</p>
+          <Link to="/">
+            <button to="/" className="greenButton mt-20">
+              <img src="/img/arrow.svg" alt="Arrow" /> Вернуться назад
+            </button>
+          </Link>
+        </div>
       )}
     </div>
   );
