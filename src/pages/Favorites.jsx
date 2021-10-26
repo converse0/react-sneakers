@@ -1,8 +1,13 @@
 import React from 'react';
-import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 
-function Favorites({ items, onAddToFavorite }) {
+import Card from '../components/Card';
+import Info from '../components/Info';
+import AppContext from '../context';
+
+function Favorites() {
+  const { favorites, onAddToFavorite } = React.useContext(AppContext);
+
   return (
     <div className="content p-40">
       <div className="d-flex align-center mb-40 justify-between">
@@ -19,22 +24,28 @@ function Favorites({ items, onAddToFavorite }) {
           Мои Закладки
         </h1>
       </div>
-      {items.length > 0 ? (
+      {favorites.length > 0 ? (
         <div className="d-flex flex-wrap">
-          {items.map((item, index) => (
+          {favorites.map((item, index) => (
             <Card key={item.id} favorited={true} onFavorite={onAddToFavorite} {...item} />
           ))}
         </div>
       ) : (
-        <div className="favorites">
-          <h2>Закладок нет :(</h2>
-          <p className="opacity-4 mb-50">Вы ничего не добавляли в закладки</p>
-          <Link to="/">
-            <button to="/" className="greenButton mt-20">
-              <img src="/img/arrow.svg" alt="Arrow" /> Вернуться назад
-            </button>
-          </Link>
-        </div>
+        <Info
+          image="arrow.svg"
+          title="Закладок нет :("
+          description="Вы ничего не добавляли в закладки"
+        />
+
+        // <div className="favorites">
+        //   <h2>Закладок нет :(</h2>
+        //   <p className="opacity-4 mb-50">Вы ничего не добавляли в закладки</p>
+        //   <Link to="/">
+        //     <button to="/" className="greenButton mt-20">
+        //       <img src="/img/arrow.svg" alt="Arrow" /> Вернуться назад
+        //     </button>
+        //   </Link>
+        // </div>
       )}
     </div>
   );
